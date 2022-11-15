@@ -2,14 +2,17 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
+  // Set State
   const [points, setPoints] = useState([]);
   const [pointsStack, setPointsStack] = useState([]);
 
+  // Get where the mouse clicked, and account for offset.
   const handlePointCreate = (e) => {
     const { clientX, clientY } = e;
     setPoints([...points, { x: clientX - 10, y: clientY - 32 }]);
   };
 
+  // Implement Redo Functionality
   const handlePointRedo = () => {
     // create a copy of the current points stack
     const pointsStackCopy = [...pointsStack];
@@ -23,6 +26,7 @@ function App() {
     setPointsStack(pointsStackCopy);
   };
 
+  // Implement Undo Functionality
   const handlePointUndo = () => {
     // Get a copy of points
     const pointsCopy = [...points];
@@ -36,6 +40,7 @@ function App() {
     setPoints(pointsCopy);
   };
 
+  // Handle Reset Functionality
   const handleReset = () => {
     setPoints([]);
     setPointsStack([]);
